@@ -256,10 +256,10 @@ h6.text-secondary {
 .svc-card:hover .thumb img { transform: scale(1.06); }
 .svc-card h4 { font-size: 21px; margin-bottom: 8px; }
 .svc-card p { font-size: 14.5px; flex-grow: 1; }
-.svc-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+.svc-foot { display: flex; margin-top: 14px; }
 .svc-price { font-family: var(--font-head); font-weight: 800; font-size: 20px; color: var(--text); white-space: nowrap; }
 .svc-price small { font-weight: 500; font-size: 13px; color: var(--muted); margin-right: 4px; }
-.svc-foot .btn { padding: 10px 24px; font-size: 14px; }
+.svc-foot .btn { width: 100%; padding: 12px 24px; font-size: 15px; }
 
 /* --- О нас + цифры --- */
 .about-photo { border-radius: 28px; overflow: hidden; min-height: 420px; position: relative; }
