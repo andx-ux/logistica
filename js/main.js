@@ -12,20 +12,11 @@
     spinner();
     
     
-    // Initiate the wowjs
-    new WOW().init();
+    // Animations are skipped for users who prefer reduced motion
+    var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reducedMotion) { new WOW().init(); } else { $(".wow").css("visibility", "visible"); }
 
 
-    // Sticky Navbar
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.sticky-top').css('top', '0px');
-        } else {
-            $('.sticky-top').css('top', '-100px');
-        }
-    });
-    
-    
     // Dropdown on mouse hover
     const $dropdown = $(".dropdown");
     const $dropdownToggle = $(".dropdown-toggle");
@@ -68,15 +59,33 @@
     });
 
 
+    // Owl clones duplicate slides for the loop: keep them out of the accessibility tree
+    function hideClones() {
+        $(".header-carousel .owl-item.cloned").attr("aria-hidden", "true").find("a,button").attr("tabindex", "-1");
+    }
+
     // Header carousel
     $(".header-carousel").owlCarousel({
-        autoplay: true,
+        autoplay: !reducedMotion,
+        autoplayHoverPause: true,
         autoplayTimeout: 6000,
         smartSpeed: 1200,
         items: 1,
         dots: true,
         loop: true,
-        nav: false
+        nav: false,
+        onInitialized: hideClones,
+        onRefreshed: hideClones
+    });
+
+    // Pause / play control for the hero slider (WCAG 2.2.2)
+    $(".hero-pause").on("click", function () {
+        var $b = $(this);
+        var paused = $b.attr("aria-pressed") === "true";
+        $(".header-carousel").trigger(paused ? "play.owl.autoplay" : "stop.owl.autoplay");
+        $b.attr("aria-pressed", paused ? "false" : "true")
+          .attr("aria-label", paused ? "Остановить автоматическую смену слайдов" : "Запустить автоматическую смену слайдов")
+          .find("i").attr("class", paused ? "bi bi-pause-fill" : "bi bi-play-fill");
     });
 
 

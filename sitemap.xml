@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.example.com/index.html</loc>
+    <loc>https://andx-ux.github.io/logistica/</loc>
+    <lastmod>2026-09-25</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.example.com/about.html</loc>
+    <loc>https://andx-ux.github.io/logistica/about.html</loc>
+    <lastmod>2026-09-25</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.example.com/service.html</loc>
+    <loc>https://andx-ux.github.io/logistica/service.html</loc>
+    <lastmod>2026-09-25</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.example.com/feature.html</loc>
-    <priority>0.6</priority>
+    <loc>https://andx-ux.github.io/logistica/feature.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.example.com/quote.html</loc>
-    <priority>0.7</priority>
+    <loc>https://andx-ux.github.io/logistica/quote.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.example.com/contact.html</loc>
-    <priority>0.7</priority>
+    <loc>https://andx-ux.github.io/logistica/contact.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>
