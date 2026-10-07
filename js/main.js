@@ -84,15 +84,14 @@
         var paused = $b.attr("aria-pressed") === "true";
         $(".header-carousel").trigger(paused ? "play.owl.autoplay" : "stop.owl.autoplay");
         $b.attr("aria-pressed", paused ? "false" : "true")
-          .attr("aria-label", paused ? "Остановить автоматическую смену слайдов" : "Запустить автоматическую смену слайдов")
+          .attr("aria-label", paused ? "Slaydların avtomatik dəyişməsini dayandır" : "Slaydların avtomatik dəyişməsini başlat")
           .find("i").attr("class", paused ? "bi bi-pause-fill" : "bi bi-play-fill");
     });
 
 
     // Forms: this template has no server backend, so Contact/Quote/Newsletter
     // are wired to open the visitor's email client via a mailto: link instead.
-    // TODO: replace with a real business email once you have one.
-    var BUSINESS_EMAIL = 'info@example.com';
+    var BUSINESS_EMAIL = 'info@rr-logistics.org';
 
     function buildMailto(subject, lines) {
         var body = lines.filter(function (line) { return !!line; }).join('\n');
@@ -116,13 +115,13 @@
         var subject = $form.find('[name="subject"]').val().trim();
         var message = $form.find('[name="message"]').val().trim();
 
-        window.location.href = buildMailto(subject || ('Сообщение с сайта от ' + name), [
-            'Имя: ' + name,
-            'Email: ' + email,
+        window.location.href = buildMailto(subject || ('Saytdan mesaj: ' + name), [
+            'Ad: ' + name,
+            'E-poçt: ' + email,
             '',
             message
         ]);
-        showFormStatus($form, 'Открываем почтовый клиент для отправки сообщения…');
+        showFormStatus($form, 'E-poçt proqramı açılır — mesajı göndərməyi təsdiq edin…');
     });
 
     $('#quoteForm').on('submit', function (e) {
@@ -132,31 +131,20 @@
         var email = $form.find('[name="email"]').val().trim();
         var mobile = $form.find('[name="mobile"]').val().trim();
         var freight = $form.find('[name="freight"]').val();
+        var transport = $form.find('[name="transport"]').val();
         var note = $form.find('[name="note"]').val().trim();
 
-        window.location.href = buildMailto('Запрос расчёта от ' + name, [
-            'Имя: ' + name,
-            'Email: ' + email,
-            'Телефон: ' + mobile,
-            'Тип груза: ' + freight,
+        window.location.href = buildMailto('Hesablama sorğusu: ' + name, [
+            'Ad: ' + name,
+            'E-poçt: ' + email,
+            'Telefon: ' + mobile,
+            'Daşınma növü: ' + (transport || '—'),
+            'Yükün növü: ' + (freight || '—'),
             '',
             note
         ]);
-        showFormStatus($form, 'Открываем почтовый клиент для отправки заявки…');
+        showFormStatus($form, 'E-poçt proqramı açılır — sorğunu göndərməyi təsdiq edin…');
     });
-
-    $('#newsletterForm').on('submit', function (e) {
-        e.preventDefault();
-        var $form = $(this);
-        var email = $form.find('[name="email"]').val().trim();
-
-        window.location.href = buildMailto('Подписка на рассылку', [
-            'Пожалуйста, подпишите этот email на рассылку: ' + email
-        ]);
-        showFormStatus($form, 'Открываем почтовый клиент для подтверждения подписки…');
-    });
-
-
 
     // Lead / callback forms (name + phone + consent) -> mailto
     $('.js-lead-form').on('submit', function (e) {
@@ -164,11 +152,11 @@
         var $form = $(this);
         var name = $form.find('[name="name"]').val().trim();
         var phone = $form.find('[name="phone"]').val().trim();
-        window.location.href = buildMailto($form.data('subject') || 'Заявка с сайта', [
-            'Имя: ' + (name || '—'),
-            'Телефон: ' + phone
+        window.location.href = buildMailto($form.data('subject') || 'Saytdan sorğu', [
+            'Ad: ' + (name || '—'),
+            'Telefon: ' + phone
         ]);
-        showFormStatus($form, 'Открываем почтовый клиент для отправки заявки…');
+        showFormStatus($form, 'E-poçt proqramı açılır — sorğunu göndərməyi təsdiq edin…');
     });
 
 })(jQuery);

@@ -1,0 +1,42 @@
+[
+  {
+    "type": "photo",
+    "src": "gallery/photos/01.jpg",
+    "title": ""
+  },
+  {
+    "type": "photo",
+    "src": "gallery/photos/02.jpg",
+    "title": ""
+  },
+  {
+    "type": "photo",
+    "src": "gallery/photos/03.jpg",
+    "title": ""
+  },
+  {
+    "type": "photo",
+    "src": "gallery/photos/04.jpg",
+    "title": ""
+  },
+  {
+    "type": "photo",
+    "src": "gallery/photos/05.jpg",
+    "title": ""
+  },
+  {
+    "type": "photo",
+    "src": "gallery/photos/06.jpg",
+    "title": ""
+  },
+  {
+    "type": "photo",
+    "src": "gallery/photos/07.jpg",
+    "title": ""
+  },
+  {
+    "type": "photo",
+    "src": "gallery/photos/08.jpg",
+    "title": ""
+  }
+]
