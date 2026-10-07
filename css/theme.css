@@ -523,3 +523,14 @@ body { font-size: 16px; }
 .lang-switch a.active { background: #fff; color: var(--ink); pointer-events: none; }
 @media (max-width: 991.98px) { .lang-switch { align-self: flex-start; } }
 h2 { font-size: clamp(24px, 3vw, 36px); line-height: 1.2; }
+
+/* --- Защита от выделения и копирования (см. js/protect.js) --- */
+body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+input, textarea, select, [contenteditable="true"], .allow-copy, .allow-copy * { -webkit-user-select: text; user-select: text; }
+img, svg, video { -webkit-user-drag: none; user-drag: none; }
+
+/* --- Имя рядом с номером телефона: крупнее и читаемее --- */
+.lead-band .call-phone small { font-size: 18px; font-weight: 600; color: #C4CAD8; margin-left: 10px; letter-spacing: .01em; }
+.h5 small.text-muted { font-size: 17px; font-weight: 600; }
+.footer .person span { font-size: 16px; font-weight: 600; color: #fff; }
+.site-header .dropdown-item small { font-size: 14px; font-weight: 600; color: #C4CAD8; }

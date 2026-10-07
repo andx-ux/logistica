@@ -11,8 +11,8 @@
     <link href="img/favicon-32.png" rel="icon" type="image/png" sizes="64x64">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="css/vendor/bootstrap-5.3.3.min.css" rel="stylesheet">
-    <link href="css/theme.css?v=20261009" rel="stylesheet">
-    <link href="css/admin.css?v=20261009" rel="stylesheet">
+    <link href="css/theme.css?v=20261011" rel="stylesheet">
+    <link href="css/admin.css?v=20261011" rel="stylesheet">
 </head>
 
 <body class="adm">
@@ -32,6 +32,7 @@
             <input class="adm-in" id="email" type="email" autocomplete="username" required>
             <label class="adm-f" for="password">Пароль</label>
             <input class="adm-in" id="password" type="password" autocomplete="current-password" required>
+            <label class="adm-f" style="font-weight:500;display:flex;gap:8px;align-items:center"><input type="checkbox" id="remember"> Запомнить на этом компьютере</label>
             <p id="loginNote" class="adm-note err" hidden></p>
             <button id="loginBtn" class="adm-btn" type="submit">Войти</button>
         </form>
@@ -96,7 +97,7 @@ service cloud.firestore {
         </div>
     </div>
 
-    <script src="js/admin.js?v=20261009"></script>
+    <script src="js/admin.js?v=20261011"></script>
 </body>
 
 </html>

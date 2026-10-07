@@ -48,3 +48,4 @@ body.adm { background: #F4F5F8; }
 .adm-help pre { background: #0B0F19; color: #D7DBE6; padding: 14px 16px; border-radius: 12px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 10px 0; }
 .adm-help a { color: var(--purple); }
 [hidden] { display: none !important; }
+body.adm, body.adm * { -webkit-user-select: text; user-select: text; }

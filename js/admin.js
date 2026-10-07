@@ -23,8 +23,23 @@
     var items = [];
 
     /* ---------- хранение сессии ---------- */
-    function saveSession() { try { if (session) localStorage.setItem('rr_admin', JSON.stringify({ r: session.refreshToken, e: session.email })); else localStorage.removeItem('rr_admin'); } catch (e) { /* без запоминания */ } }
-    function loadSaved() { try { return JSON.parse(localStorage.getItem('rr_admin') || 'null'); } catch (e) { return null; } }
+    // Вход хранится в sessionStorage (исчезает при закрытии вкладки). Если отмечено «Запомнить на этом компьютере» — в localStorage.
+    var remember = false;
+    function saveSession() {
+        try {
+            localStorage.removeItem('rr_admin'); sessionStorage.removeItem('rr_admin');
+            if (session) (remember ? localStorage : sessionStorage).setItem('rr_admin', JSON.stringify({ r: session.refreshToken, e: session.email }));
+        } catch (e) { /* без запоминания */ }
+    }
+    function loadSaved() {
+        try {
+            var s = sessionStorage.getItem('rr_admin');
+            if (s) return JSON.parse(s);
+            s = localStorage.getItem('rr_admin');
+            if (s) { remember = true; return JSON.parse(s); }
+        } catch (e) { /* пусто */ }
+        return null;
+    }
 
     /* ---------- вход ---------- */
     var AUTH_ERR = {
@@ -226,6 +241,7 @@
             ev.preventDefault();
             var b = $('loginBtn'); busy(b, true);
             note('loginNote', '');
+            remember = $('remember').checked;
             login($('email').value.trim(), $('password').value).then(function () { $('password').value = ''; enter(); })
                 .catch(function (e) { note('loginNote', e.message === 'NOT_ADMIN' ? 'У этого аккаунта нет доступа к панели.' : authMsg(e.message)); })
                 .then(function () { busy(b, false, 'Войти'); });
