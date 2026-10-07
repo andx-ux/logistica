@@ -89,6 +89,9 @@
     });
 
 
+    // Точки слайдера главной получают подписи (для экранных дикторов)
+    $('.header-carousel .owl-dot').each(function (i) { $(this).attr('aria-label', (RU ? 'Слайд ' : 'Slayd ') + (i + 1)); });
+
     // Forms: this template has no server backend, so Contact/Quote/Newsletter
     // are wired to open the visitor's email client via a mailto: link instead.
     var BUSINESS_EMAIL = 'info@rr-logistics.org';
@@ -104,7 +107,7 @@
         pauseSlides: 'Slaydların avtomatik dəyişməsini dayandır', playSlides: 'Slaydların avtomatik dəyişməsini başlat',
         name: 'Ad', email: 'E-poçt', phone: 'Telefon', transport: 'Daşınma növü', freight: 'Yükün növü',
         siteMsg: 'Saytdan mesaj: ', quote: 'Hesablama sorğusu: ', siteReq: 'Saytdan sorğu',
-        openMsg: S.openMsg, openReq: S.openReq
+        openMsg: 'E-poçt proqramı açılır — mesajı göndərməyi təsdiq edin…', openReq: 'E-poçt proqramı açılır — sorğunu göndərməyi təsdiq edin…'
     };
 
     function buildMailto(subject, lines) {

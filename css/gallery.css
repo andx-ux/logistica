@@ -221,3 +221,7 @@
 /* Ana səhifədəki qısa qalereya: 6 foto = 3 sütun × 2 sətir */
 .gal-grid[data-limit] { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 767.98px) { .gal-grid[data-limit] { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+/* Мобильные: минимальная высота панели не должна растягивать её шире экрана */
+.gal-stage { max-width: 100%; }
+@media (max-width: 575.98px) { .gal-stage { min-height: 0; aspect-ratio: 4 / 3; } }
