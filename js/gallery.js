@@ -10,7 +10,16 @@
     var grid = document.getElementById('galGrid');
     if (!stage && !grid) return;
 
-    var T = { all: 'Hamısı', photo: 'Foto', video: 'Video', empty: 'Qalereya tezliklə doldurulacaq.', prev: 'Əvvəlki', next: 'Növbəti', pause: 'Avtomatik dəyişməni dayandır', play: 'Avtomatik dəyişməni başlat', close: 'Bağla', photoN: 'Fotoşəkil', videoN: 'Video', of: ' / ' };
+    var lang = document.documentElement.lang === 'ru' ? 'ru' : 'az';
+    var TT = {
+        az: { all: 'Hamısı', photo: 'Foto', video: 'Video', empty: 'Qalereya tezliklə doldurulacaq.', prev: 'Əvvəlki', next: 'Növbəti', pause: 'Avtomatik dəyişməni dayandır', play: 'Avtomatik dəyişməni başlat', close: 'Bağla', photoN: 'Fotoşəkil', videoN: 'Video', gallery: 'Qalereya', of: ' / ' },
+        ru: { all: 'Все', photo: 'Фото', video: 'Видео', empty: 'Галерея скоро будет заполнена.', prev: 'Назад', next: 'Вперёд', pause: 'Остановить автоматическую смену', play: 'Запустить автоматическую смену', close: 'Закрыть', photoN: 'Фото', videoN: 'Видео', gallery: 'Галерея', of: ' / ' }
+    };
+    var T = TT[lang];
+    var holder = stage || grid;
+    var BASE = holder.getAttribute('data-base') || '';   // «../» на страницах русской версии
+    // подпись может быть строкой или объектом { "az": "...", "ru": "..." }
+    function titleOf(it) { var t = it && it.title; if (t && typeof t === 'object') return t[lang] || t.az || t.ru || ''; return t || ''; }
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var INTERVAL = 5000;
 
@@ -23,7 +32,7 @@
     function icon(name) { var i = el('i', 'bi bi-' + name); i.setAttribute('aria-hidden', 'true'); return i; }
     function safeSrc(s) { return typeof s === 'string' && /^[\w\-./%()~!*]+$/.test(s) && s.indexOf('..') === -1; }
 
-    fetch('gallery/items.json', { cache: 'no-cache' })
+    fetch(BASE + 'gallery/items.json', { cache: 'no-cache' })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(init)
         .catch(function () { init([]); });
@@ -33,6 +42,12 @@
             if (!it || typeof it !== 'object') return false;
             if (it.type === 'youtube') return /^[\w-]{6,20}$/.test(it.id || '');
             return (it.type === 'photo' || it.type === 'video') && safeSrc(it.src);
+        }).map(function (it) {
+            var c = {}; for (var k in it) c[k] = it[k];
+            c.title = titleOf(it);
+            if (c.src) c.src = BASE + c.src;
+            if (c.poster && safeSrc(c.poster)) c.poster = BASE + c.poster;
+            return c;
         });
         var photos = items.filter(function (i) { return i.type === 'photo'; });
         if (stage) buildStage(photos);
@@ -168,7 +183,7 @@
                     b.appendChild(img);
                 } else if (it.type === 'video') {
                     var v = el('video'); v.src = it.src + '#t=0.5'; v.preload = 'metadata'; v.muted = true; v.setAttribute('playsinline', '');
-                    if (it.poster && safeSrc(it.poster)) v.poster = it.poster;
+                    if (it.poster) v.poster = it.poster;
                     b.appendChild(v);
                     b.appendChild(el('span', 'gal-badge', T.videoN));
                     var pl = el('span', 'gal-play'); pl.appendChild(icon('play-fill')); b.appendChild(pl);
@@ -190,7 +205,7 @@
         function ensureBox() {
             if (box) return;
             box = el('dialog', 'gal-lightbox');
-            box.setAttribute('aria-label', 'Qalereya');
+            box.setAttribute('aria-label', T.gallery);
             body = el('div', 'gal-lb-body'); cap = el('div', 'gal-lb-cap'); count = el('div', 'gal-lb-count');
             var close = el('button', 'gal-lb-close'), pr = el('button', 'gal-lb-prev'), nx = el('button', 'gal-lb-next');
             close.type = pr.type = nx.type = 'button';
@@ -215,7 +230,7 @@
                 var im = el('img'); im.src = it.src; im.alt = it.title || (T.photoN + ' ' + (at + 1)); body.appendChild(im);
             } else if (it.type === 'video') {
                 var v = el('video'); v.src = it.src; v.controls = true; v.autoplay = true; v.setAttribute('playsinline', '');
-                if (it.poster && safeSrc(it.poster)) v.poster = it.poster;
+                if (it.poster) v.poster = it.poster;
                 body.appendChild(v);
             } else {
                 var f = el('iframe'); f.src = 'https://www.youtube-nocookie.com/embed/' + it.id + '?rel=0'; f.title = it.title || T.videoN;

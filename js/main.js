@@ -84,7 +84,7 @@
         var paused = $b.attr("aria-pressed") === "true";
         $(".header-carousel").trigger(paused ? "play.owl.autoplay" : "stop.owl.autoplay");
         $b.attr("aria-pressed", paused ? "false" : "true")
-          .attr("aria-label", paused ? "Slaydların avtomatik dəyişməsini dayandır" : "Slaydların avtomatik dəyişməsini başlat")
+          .attr("aria-label", paused ? S.pauseSlides : S.playSlides)
           .find("i").attr("class", paused ? "bi bi-pause-fill" : "bi bi-play-fill");
     });
 
@@ -92,6 +92,20 @@
     // Forms: this template has no server backend, so Contact/Quote/Newsletter
     // are wired to open the visitor's email client via a mailto: link instead.
     var BUSINESS_EMAIL = 'info@rr-logistics.org';
+
+    // Тексты писем — на языке страницы
+    var RU = document.documentElement.lang === 'ru';
+    var S = RU ? {
+        pauseSlides: 'Остановить автоматическую смену слайдов', playSlides: 'Запустить автоматическую смену слайдов',
+        name: 'Имя', email: 'E-mail', phone: 'Телефон', transport: 'Вид перевозки', freight: 'Тип груза',
+        siteMsg: 'Сообщение с сайта: ', quote: 'Запрос расчёта: ', siteReq: 'Запрос с сайта',
+        openMsg: 'Открывается почтовая программа — подтвердите отправку сообщения…', openReq: 'Открывается почтовая программа — подтвердите отправку запроса…'
+    } : {
+        pauseSlides: 'Slaydların avtomatik dəyişməsini dayandır', playSlides: 'Slaydların avtomatik dəyişməsini başlat',
+        name: 'Ad', email: 'E-poçt', phone: 'Telefon', transport: 'Daşınma növü', freight: 'Yükün növü',
+        siteMsg: 'Saytdan mesaj: ', quote: 'Hesablama sorğusu: ', siteReq: 'Saytdan sorğu',
+        openMsg: S.openMsg, openReq: S.openReq
+    };
 
     function buildMailto(subject, lines) {
         var body = lines.filter(function (line) { return !!line; }).join('\n');
@@ -115,13 +129,13 @@
         var subject = $form.find('[name="subject"]').val().trim();
         var message = $form.find('[name="message"]').val().trim();
 
-        window.location.href = buildMailto(subject || ('Saytdan mesaj: ' + name), [
-            'Ad: ' + name,
-            'E-poçt: ' + email,
+        window.location.href = buildMailto(subject || (S.siteMsg + name), [
+            S.name + ': ' + name,
+            S.email + ': ' + email,
             '',
             message
         ]);
-        showFormStatus($form, 'E-poçt proqramı açılır — mesajı göndərməyi təsdiq edin…');
+        showFormStatus($form, S.openMsg);
     });
 
     $('#quoteForm').on('submit', function (e) {
@@ -134,16 +148,16 @@
         var transport = $form.find('[name="transport"]').val();
         var note = $form.find('[name="note"]').val().trim();
 
-        window.location.href = buildMailto('Hesablama sorğusu: ' + name, [
-            'Ad: ' + name,
-            'E-poçt: ' + email,
-            'Telefon: ' + mobile,
-            'Daşınma növü: ' + (transport || '—'),
-            'Yükün növü: ' + (freight || '—'),
+        window.location.href = buildMailto(S.quote + name, [
+            S.name + ': ' + name,
+            S.email + ': ' + email,
+            S.phone + ': ' + mobile,
+            S.transport + ': ' + (transport || '—'),
+            S.freight + ': ' + (freight || '—'),
             '',
             note
         ]);
-        showFormStatus($form, 'E-poçt proqramı açılır — sorğunu göndərməyi təsdiq edin…');
+        showFormStatus($form, S.openReq);
     });
 
     // Lead / callback forms (name + phone + consent) -> mailto
@@ -152,11 +166,11 @@
         var $form = $(this);
         var name = $form.find('[name="name"]').val().trim();
         var phone = $form.find('[name="phone"]').val().trim();
-        window.location.href = buildMailto($form.data('subject') || 'Saytdan sorğu', [
-            'Ad: ' + (name || '—'),
-            'Telefon: ' + phone
+        window.location.href = buildMailto($form.data('subject') || S.siteReq, [
+            S.name + ': ' + (name || '—'),
+            S.phone + ': ' + phone
         ]);
-        showFormStatus($form, 'E-poçt proqramı açılır — sorğunu göndərməyi təsdiq edin…');
+        showFormStatus($form, S.openReq);
     });
 
 })(jQuery);
