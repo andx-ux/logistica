@@ -92,6 +92,19 @@
     // Точки слайдера главной получают подписи (для экранных дикторов)
     $('.header-carousel .owl-dot').each(function (i) { $(this).attr('aria-label', (RU ? 'Слайд ' : 'Slayd ') + (i + 1)); });
 
+    // Карта Google: подгружается только после нажатия кнопки
+    $('.map-load').on('click', function () {
+        var $box = $(this).closest('.map-box');
+        var src = String($box.data('src') || '');
+        if (src.indexOf('https://www.google.com/maps') !== 0) return;
+        var f = document.createElement('iframe');
+        f.src = src;
+        f.title = String($box.data('title') || '');
+        f.setAttribute('allowfullscreen', '');
+        f.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        $box.empty().append(f);
+    });
+
     // Forms: this template has no server backend, so Contact/Quote/Newsletter
     // are wired to open the visitor's email client via a mailto: link instead.
     var BUSINESS_EMAIL = 'info@rr-logistics.org';
