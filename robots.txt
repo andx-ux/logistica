@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://andx-ux.github.io/logistica/sitemap.xml
+Sitemap: https://rr-logistics.org/sitemap.xml
