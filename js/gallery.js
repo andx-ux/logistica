@@ -32,20 +32,43 @@
     function icon(name) { var i = el('i', 'bi bi-' + name); i.setAttribute('aria-hidden', 'true'); return i; }
     function safeSrc(s) { return typeof s === 'string' && /^[\w\-./%()~!*]+$/.test(s) && s.indexOf('..') === -1; }
 
-    fetch(BASE + 'gallery/items.json', { cache: 'no-cache' })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(init)
-        .catch(function () { init([]); });
+    /* Источник 1 — панель управления (admin.html): Firestore, коллекция logistica_gallery.
+       Источник 2 (запасной, пока в панели пусто) — файл gallery/items.json с образцами. */
+    var FB = { project: 'baliqchi-news', key: 'AIzaSyDRAOw6pZ_XtsmnRXYFK6eWS9Pvj_cxA58', col: 'logistica_gallery' };
+    var IMG_HOSTS = ['i.postimg.cc', 'postimg.cc', 'i.ibb.co'];
+    function remoteImgOk(u) {
+        try { var x = new URL(u); return x.protocol === 'https:' && IMG_HOSTS.indexOf(x.hostname) !== -1 && /\.(jpe?g|png|webp|gif|avif)$/i.test(x.pathname); } catch (e) { return false; }
+    }
+    function fetchRemote() {
+        var url = 'https://firestore.googleapis.com/v1/projects/' + FB.project + '/databases/(default)/documents/' + FB.col +
+            '?pageSize=300&orderBy=' + encodeURIComponent('timestamp desc') + '&key=' + FB.key;
+        return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) {
+            return (j.documents || []).map(function (d) {
+                var f = d.fields || {};
+                var s = function (k) { return f[k] && f[k].stringValue != null ? f[k].stringValue : ''; };
+                var title = { az: s('title_az'), ru: s('title_ru') };
+                if (s('type') === 'youtube') return { type: 'youtube', id: s('yt'), title: title };
+                return { type: 'photo', src: s('url'), title: title, remote: true };
+            });
+        });
+    }
+    function fetchStatic() {
+        return fetch(BASE + 'gallery/items.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+    }
+    fetchRemote().catch(function () { return []; })
+        .then(function (r) { return r.length ? r : fetchStatic().catch(function () { return []; }); })
+        .then(init);
 
     function init(raw) {
         var items = (Array.isArray(raw) ? raw : []).filter(function (it) {
             if (!it || typeof it !== 'object') return false;
             if (it.type === 'youtube') return /^[\w-]{6,20}$/.test(it.id || '');
+            if (it.remote) return it.type === 'photo' && remoteImgOk(it.src);
             return (it.type === 'photo' || it.type === 'video') && safeSrc(it.src);
         }).map(function (it) {
             var c = {}; for (var k in it) c[k] = it[k];
             c.title = titleOf(it);
-            if (c.src) c.src = BASE + c.src;
+            if (c.src && !it.remote) c.src = BASE + c.src;
             if (c.poster && safeSrc(c.poster)) c.poster = BASE + c.poster;
             return c;
         });

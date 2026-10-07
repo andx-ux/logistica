@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Панель галереи — R.R. Logistics</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https://i.ytimg.com https://i.postimg.cc https://postimg.cc https://i.ibb.co; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <link href="img/favicon-32.png" rel="icon" type="image/png" sizes="64x64">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="css/vendor/bootstrap-5.3.3.min.css" rel="stylesheet">
+    <link href="css/theme.css?v=20261008" rel="stylesheet">
+    <link href="css/admin.css?v=20261008" rel="stylesheet">
+</head>
+
+<body class="adm">
+    <div class="adm-top">
+        <div class="container wrap">
+            <a class="brand" href="index.html"><img src="img/logo-mark.webp" width="480" height="349" alt="R.R. Logistics"><b>Панель галереи</b></a>
+            <div><span id="who" style="color:#C9CEDA;font-size:14px;margin-right:12px"></span><a class="back" href="gallery.html">Открыть галерею на сайте ↗</a> <button id="logout" class="adm-link" type="button">Выйти</button></div>
+        </div>
+    </div>
+
+    <!-- Вход -->
+    <div id="loginScreen" class="adm-main" hidden>
+        <form id="loginForm" class="adm-card adm-login" autocomplete="on">
+            <h2>Вход</h2>
+            <p class="hint">Для администратора сайта.</p>
+            <label class="adm-f" for="email">Почта</label>
+            <input class="adm-in" id="email" type="email" autocomplete="username" required>
+            <label class="adm-f" for="password">Пароль</label>
+            <input class="adm-in" id="password" type="password" autocomplete="current-password" required>
+            <p id="loginNote" class="adm-note err" hidden></p>
+            <button id="loginBtn" class="adm-btn" type="submit">Войти</button>
+        </form>
+    </div>
+
+    <!-- Панель -->
+    <div id="panel" class="adm-main" hidden>
+        <div class="adm-card">
+            <h2>📸 Добавить фото</h2>
+            <p class="hint">Сначала загрузите фото на <a href="https://postimages.org/" target="_blank" rel="noopener">postimages.org</a> и скопируйте «Прямую ссылку» (Direct link) — как мы делали на сайте рыбаков. Можно вставить несколько ссылок, по одной в строке.</p>
+            <label class="adm-f" for="photoUrls">Прямые ссылки на фото</label>
+            <textarea class="adm-ta" id="photoUrls" placeholder="https://i.postimg.cc/XXXXXXXX/foto.jpg" spellcheck="false"></textarea>
+            <img id="photoPreview" class="adm-prev" alt="Предпросмотр" hidden>
+            <div class="adm-row">
+                <div><label class="adm-f" for="photoAz">Подпись (azərbaycanca)</label><input class="adm-in" id="photoAz" maxlength="150" placeholder="необязательно"></div>
+                <div><label class="adm-f" for="photoRu">Подпись (по-русски)</label><input class="adm-in" id="photoRu" maxlength="150" placeholder="необязательно"></div>
+            </div>
+            <p id="photoNote" class="adm-note err" hidden></p>
+            <button id="addPhoto" class="adm-btn" type="button">Добавить на сайт</button>
+        </div>
+
+        <div class="adm-card">
+            <h2>▶️ Добавить видео с YouTube</h2>
+            <p class="hint">Вставьте ссылку на видео (можно «Доступ по ссылке»). Несколько — по одной в строке.</p>
+            <label class="adm-f" for="ytUrls">Ссылки на видео</label>
+            <textarea class="adm-ta" id="ytUrls" placeholder="https://www.youtube.com/watch?v=XXXXXXXXXXX" spellcheck="false"></textarea>
+            <img id="ytPreview" class="adm-prev" alt="Предпросмотр" hidden>
+            <div class="adm-row">
+                <div><label class="adm-f" for="ytAz">Подпись (azərbaycanca)</label><input class="adm-in" id="ytAz" maxlength="150" placeholder="необязательно"></div>
+                <div><label class="adm-f" for="ytRu">Подпись (по-русски)</label><input class="adm-in" id="ytRu" maxlength="150" placeholder="необязательно"></div>
+            </div>
+            <p id="ytNote" class="adm-note err" hidden></p>
+            <button id="addYt" class="adm-btn" type="button">Добавить на сайт</button>
+        </div>
+
+        <div class="adm-card">
+            <h2>Что сейчас в галерее <small id="count"></small></h2>
+            <p class="hint">Новые элементы появляются сверху. Стрелками меняйте порядок, ✎ — подпись, 🗑 — убрать с сайта.</p>
+            <p id="listNote" class="adm-note err" hidden></p>
+            <div id="list" class="adm-list"></div>
+        </div>
+
+        <div class="adm-card adm-help">
+            <h2>Инструкция (один раз)</h2>
+            <ol>
+                <li><b>Разрешить запись в Firestore.</b> Откройте <a href="https://console.firebase.google.com/project/baliqchi-news/firestore/databases/-default-/rules" target="_blank" rel="noopener">Firebase → Firestore → Правила</a> и внутри блока <code>match /databases/{database}/documents { … }</code> добавьте:
+<pre>match /logistica_gallery/{id} {
+  allow read: if true;
+  allow write: if request.auth != null
+    &amp;&amp; request.auth.token.email == 'anaris0909@gmail.com';
+}</pre>
+                    Нажмите <b>«Опубликовать»</b>. Без этого шага сайт не сможет читать галерею, а панель — сохранять.</li>
+                <li><b>Фото:</b> postimages.org → «Choose images» → после загрузки скопируйте <b>«Direct link»</b> (оканчивается на .jpg/.png) и вставьте сюда. Фото лучше до 2000 px по ширине.</li>
+                <li><b>Видео:</b> загрузите на YouTube, скопируйте ссылку из адресной строки и вставьте сюда.</li>
+                <li>Пока в панели ничего нет, на сайте показываются образцы-заглушки. Как только добавите первый элемент, образцы пропадут.</li>
+            </ol>
+        </div>
+    </div>
+
+    <script src="js/admin.js?v=20261008"></script>
+</body>
+
+</html>

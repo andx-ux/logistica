@@ -1,0 +1,50 @@
+/* Панель управления галереей */
+body.adm { background: #F4F5F8; }
+.adm-top { background: var(--ink); color: #fff; }
+.adm-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; flex-wrap: wrap; }
+.adm-top .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; }
+.adm-top .brand img { height: 42px; width: auto; background: #fff; border-radius: 10px; padding: 3px 7px; }
+.adm-top .brand b { font-family: var(--font-head); font-size: 17px; }
+.adm-top a.back { color: #C9CEDA; font-size: 14px; text-decoration: none; margin-right: 10px; }
+.adm-top a.back:hover { color: #fff; }
+.adm-main { max-width: 980px; margin: 32px auto 80px; padding: 0 16px; }
+.adm-card { background: #fff; border-radius: 22px; padding: 26px; margin-bottom: 22px; box-shadow: 0 10px 40px rgba(11, 15, 25, .06); }
+.adm-card h2 { font-size: 22px; margin: 0 0 6px; }
+.adm-card h2 small { color: var(--muted); font-weight: 500; font-size: 15px; }
+.adm-card p.hint { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+.adm-login { max-width: 420px; margin: 8vh auto; }
+.adm-f { display: block; font-weight: 600; font-size: 14px; margin: 14px 0 6px; font-family: var(--font-head); }
+.adm-in, .adm-ta { width: 100%; border: 1px solid #D5DAE5; border-radius: 12px; padding: 12px 14px; font-size: 15px; font-family: var(--font-body); background: #fff; }
+.adm-ta { min-height: 92px; resize: vertical; }
+.adm-in:focus, .adm-ta:focus { outline: 0; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(37, 99, 168, .18); }
+.adm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 575.98px) { .adm-row { grid-template-columns: 1fr; } }
+.adm-btn { display: inline-block; margin-top: 18px; border: 0; border-radius: 99px; background: var(--purple); color: #fff; font-family: var(--font-head); font-weight: 700; padding: 13px 32px; cursor: pointer; font-size: 15px; }
+.adm-btn:hover { background: var(--purple-hover); }
+.adm-btn:disabled { opacity: .55; cursor: wait; }
+.adm-link { background: none; border: 0; color: #C9CEDA; cursor: pointer; font-size: 14px; }
+.adm-link:hover { color: #fff; }
+.adm-note { margin: 12px 0 0; padding: 10px 14px; border-radius: 12px; font-size: 14px; }
+.adm-note[hidden] { display: none; }
+.adm-note.err { background: #FDECEC; color: #8A1C1C; }
+.adm-note.ok { background: #E6F6EC; color: #17633A; }
+.adm-prev { display: block; max-height: 150px; max-width: 100%; border-radius: 12px; margin-top: 12px; }
+.adm-prev[hidden] { display: none; }
+.adm-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; margin-top: 16px; }
+.adm-item { border: 1px solid #E4E7EF; border-radius: 16px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+.adm-thumb { position: relative; aspect-ratio: 4 / 3; background: var(--ink); }
+.adm-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.adm-badge { position: absolute; top: 8px; left: 8px; background: #C4302B; color: #fff; font-size: 11px; font-weight: 700; border-radius: 99px; padding: 3px 10px; }
+.adm-cap { padding: 10px 12px 4px; font-size: 14px; flex: 1; }
+.adm-cap b { display: block; font-family: var(--font-head); font-weight: 600; word-break: break-word; }
+.adm-cap small { color: var(--muted); }
+.adm-actions { display: flex; gap: 6px; padding: 8px 12px 12px; }
+.adm-btn-sm { border: 1px solid #D5DAE5; background: #fff; border-radius: 10px; width: 38px; height: 34px; cursor: pointer; font-size: 14px; }
+.adm-btn-sm:hover:not(:disabled) { border-color: var(--purple); color: var(--purple); }
+.adm-btn-sm:disabled { opacity: .35; cursor: default; }
+.adm-empty { color: var(--muted); grid-column: 1 / -1; }
+.adm-help ol { padding-left: 20px; }
+.adm-help li { margin-bottom: 10px; color: var(--muted); line-height: 1.6; }
+.adm-help pre { background: #0B0F19; color: #D7DBE6; padding: 14px 16px; border-radius: 12px; overflow-x: auto; font-size: 13px; line-height: 1.5; margin: 10px 0; }
+.adm-help a { color: var(--purple); }
+[hidden] { display: none !important; }
