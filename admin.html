@@ -11,8 +11,8 @@
     <link href="img/favicon-32.png" rel="icon" type="image/png" sizes="64x64">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="css/vendor/bootstrap-5.3.3.min.css" rel="stylesheet">
-    <link href="css/theme.css?v=20261008" rel="stylesheet">
-    <link href="css/admin.css?v=20261008" rel="stylesheet">
+    <link href="css/theme.css?v=20261009" rel="stylesheet">
+    <link href="css/admin.css?v=20261009" rel="stylesheet">
 </head>
 
 <body class="adm">
@@ -77,13 +77,18 @@
         <div class="adm-card adm-help">
             <h2>Инструкция (один раз)</h2>
             <ol>
-                <li><b>Разрешить запись в Firestore.</b> Откройте <a href="https://console.firebase.google.com/project/baliqchi-news/firestore/databases/-default-/rules" target="_blank" rel="noopener">Firebase → Firestore → Правила</a> и внутри блока <code>match /databases/{database}/documents { … }</code> добавьте:
-<pre>match /logistica_gallery/{id} {
-  allow read: if true;
-  allow write: if request.auth != null
-    &amp;&amp; request.auth.token.email == 'anaris0909@gmail.com';
-}</pre>
-                    Нажмите <b>«Опубликовать»</b>. Без этого шага сайт не сможет читать галерею, а панель — сохранять.</li>
+                <li><b>Создать администратора.</b> Откройте <a href="https://console.firebase.google.com/project/rr-logistics-9b299/authentication/users" target="_blank" rel="noopener">Firebase → Authentication → Users</a>, нажмите <b>Add user</b>, введите почту <code>anaris0909@gmail.com</code> и придумайте пароль — с ним вы будете входить в эту панель.</li>
+                <li><b>Разрешить работу с галереей.</b> Откройте <a href="https://console.firebase.google.com/project/rr-logistics-9b299/firestore/databases/-default-/rules" target="_blank" rel="noopener">Firebase → Firestore → Rules</a>, замените весь текст на приведённый ниже и нажмите <b>Publish</b>:
+<pre>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /logistica_gallery/{id} {
+      allow read: if true;
+      allow write: if request.auth != null
+        &amp;&amp; request.auth.token.email == 'anaris0909@gmail.com';
+    }
+  }
+}</pre></li>
                 <li><b>Фото:</b> postimages.org → «Choose images» → после загрузки скопируйте <b>«Direct link»</b> (оканчивается на .jpg/.png) и вставьте сюда. Фото лучше до 2000 px по ширине.</li>
                 <li><b>Видео:</b> загрузите на YouTube, скопируйте ссылку из адресной строки и вставьте сюда.</li>
                 <li>Пока в панели ничего нет, на сайте показываются образцы-заглушки. Как только добавите первый элемент, образцы пропадут.</li>
@@ -91,7 +96,7 @@
         </div>
     </div>
 
-    <script src="js/admin.js?v=20261008"></script>
+    <script src="js/admin.js?v=20261009"></script>
 </body>
 
 </html>

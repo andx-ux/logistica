@@ -34,7 +34,7 @@
 
     /* Источник 1 — панель управления (admin.html): Firestore, коллекция logistica_gallery.
        Источник 2 (запасной, пока в панели пусто) — файл gallery/items.json с образцами. */
-    var FB = { project: 'baliqchi-news', key: 'AIzaSyDRAOw6pZ_XtsmnRXYFK6eWS9Pvj_cxA58', col: 'logistica_gallery' };
+    var FB = { project: 'rr-logistics-9b299', key: 'AIzaSyCo8EzOZQERwqMWe78MlV2FuuOD2Pd39YQ', col: 'logistica_gallery' };
     var IMG_HOSTS = ['i.postimg.cc', 'postimg.cc', 'i.ibb.co'];
     function remoteImgOk(u) {
         try { var x = new URL(u); return x.protocol === 'https:' && IMG_HOSTS.indexOf(x.hostname) !== -1 && /\.(jpe?g|png|webp|gif|avif)$/i.test(x.pathname); } catch (e) { return false; }

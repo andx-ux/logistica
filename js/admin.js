@@ -1,5 +1,5 @@
 /* Панель управления галереей (admin.html).
-   Вход — по e-mail и паролю администратора (Firebase Authentication, тот же аккаунт, что в baliqchi-portal).
+   Вход — по e-mail и паролю администратора (Firebase Authentication, отдельный проект rr-logistics-9b299).
    Данные галереи — коллекция «logistica_gallery» в Firestore; сайт читает её напрямую (js/gallery.js).
    Фото — по прямой ссылке (postimages.org), видео — ссылка на YouTube.
    Работает без сторонних скриптов: запросы идут на REST-интерфейсы Firebase. */
@@ -7,8 +7,8 @@
     'use strict';
 
     var FB = {
-        project: 'baliqchi-news',
-        key: 'AIzaSyDRAOw6pZ_XtsmnRXYFK6eWS9Pvj_cxA58',   // публичный ключ веб-приложения Firebase (не секрет)
+        project: 'rr-logistics-9b299',
+        key: 'AIzaSyCo8EzOZQERwqMWe78MlV2FuuOD2Pd39YQ',   // публичный ключ веб-приложения Firebase (не секрет)
         col: 'logistica_gallery'
     };
     // Войти в панель могут только эти адреса. Настоящая защита — правила Firestore (см. инструкцию в admin.html).
