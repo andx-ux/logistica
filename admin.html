@@ -7,12 +7,12 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="robots" content="noindex, nofollow">
     <meta name="referrer" content="no-referrer">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https://i.ytimg.com https://i.postimg.cc https://postimg.cc https://i.ibb.co; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https://i.ytimg.com https://i.postimg.cc https://postimg.cc https://i.ibb.co; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'none'">
     <link href="img/favicon-32.png" rel="icon" type="image/png" sizes="64x64">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="css/fonts.css?v=20261013" rel="stylesheet">
     <link href="css/vendor/bootstrap-5.3.3.min.css" rel="stylesheet">
-    <link href="css/theme.css?v=20261011" rel="stylesheet">
-    <link href="css/admin.css?v=20261011" rel="stylesheet">
+    <link href="css/theme.css?v=20261013" rel="stylesheet">
+    <link href="css/admin.css?v=20261013" rel="stylesheet">
 </head>
 
 <body class="adm">
@@ -28,8 +28,8 @@
         <form id="loginForm" class="adm-card adm-login" autocomplete="on">
             <h2>Вход</h2>
             <p class="hint">Для администратора сайта.</p>
-            <label class="adm-f" for="email">Почта</label>
-            <input class="adm-in" id="email" type="email" autocomplete="username" required>
+            <label class="adm-f" for="login">Логин</label>
+            <input class="adm-in" id="login" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
             <label class="adm-f" for="password">Пароль</label>
             <input class="adm-in" id="password" type="password" autocomplete="current-password" required>
             <label class="adm-f" style="font-weight:500;display:flex;gap:8px;align-items:center"><input type="checkbox" id="remember"> Запомнить на этом компьютере</label>
@@ -78,7 +78,7 @@
         <div class="adm-card adm-help">
             <h2>Инструкция (один раз)</h2>
             <ol>
-                <li><b>Создать администратора.</b> Откройте <a href="https://console.firebase.google.com/project/rr-logistics-9b299/authentication/users" target="_blank" rel="noopener">Firebase → Authentication → Users</a>, нажмите <b>Add user</b>, введите почту <code>anaris0909@gmail.com</code> и придумайте пароль — с ним вы будете входить в эту панель.</li>
+                <li><b>Создать администратора.</b> Откройте <a href="https://console.firebase.google.com/project/rr-logistics-9b299/authentication/users" target="_blank" rel="noopener">Firebase → Authentication → Users</a>, нажмите <b>Add user</b>, в поле почты введите <code>admin@gallery.rr-logistics.org</code> (это внутренний адрес для логина <b>admin</b>, настоящая почта не нужна) и придумайте длинный пароль. В панель вы входите по логину <b>admin</b> и этому паролю.</li>
                 <li><b>Разрешить работу с галереей.</b> Откройте <a href="https://console.firebase.google.com/project/rr-logistics-9b299/firestore/databases/-default-/rules" target="_blank" rel="noopener">Firebase → Firestore → Rules</a>, замените весь текст на приведённый ниже и нажмите <b>Publish</b>:
 <pre>rules_version = '2';
 service cloud.firestore {
@@ -86,7 +86,7 @@ service cloud.firestore {
     match /logistica_gallery/{id} {
       allow read: if true;
       allow write: if request.auth != null
-        &amp;&amp; request.auth.token.email == 'anaris0909@gmail.com';
+        &amp;&amp; request.auth.token.email == 'admin@gallery.rr-logistics.org';
     }
   }
 }</pre></li>
@@ -97,7 +97,7 @@ service cloud.firestore {
         </div>
     </div>
 
-    <script src="js/admin.js?v=20261011"></script>
+    <script src="js/admin.js?v=20261013"></script>
 </body>
 
 </html>

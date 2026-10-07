@@ -1,5 +1,5 @@
 /* Панель управления галереей (admin.html).
-   Вход — по e-mail и паролю администратора (Firebase Authentication, отдельный проект rr-logistics-9b299).
+   Вход — по логину и паролю администратора (Firebase Authentication, отдельный проект rr-logistics-9b299).
    Данные галереи — коллекция «logistica_gallery» в Firestore; сайт читает её напрямую (js/gallery.js).
    Фото — по прямой ссылке (postimages.org), видео — ссылка на YouTube.
    Работает без сторонних скриптов: запросы идут на REST-интерфейсы Firebase. */
@@ -11,8 +11,12 @@
         key: 'AIzaSyCo8EzOZQERwqMWe78MlV2FuuOD2Pd39YQ',   // публичный ключ веб-приложения Firebase (не секрет)
         col: 'logistica_gallery'
     };
-    // Войти в панель могут только эти адреса. Настоящая защита — правила Firestore (см. инструкцию в admin.html).
-    var ADMIN_EMAILS = ['anaris0909@gmail.com'];
+    // Вход по логину: Firebase требует адрес почты, поэтому логин превращается во внутренний адрес вида «логин@gallery.rr-logistics.org»
+    // (настоящего почтового ящика не нужно). Войти могут только эти логины. Настоящая защита — правила Firestore (см. инструкцию в admin.html).
+    var LOGIN_DOMAIN = '@gallery.rr-logistics.org';
+    var ADMIN_EMAILS = ['admin' + LOGIN_DOMAIN];
+    function loginToEmail(v) { v = String(v || '').trim().toLowerCase(); return /^[a-z0-9._-]{2,32}$/.test(v) ? v + LOGIN_DOMAIN : ''; }
+    function emailToLogin(e) { return String(e || '').replace(LOGIN_DOMAIN, ''); }
     var IMG_HOSTS = ['i.postimg.cc', 'postimg.cc', 'i.ibb.co'];
     var DOCS = 'https://firestore.googleapis.com/v1/projects/' + FB.project + '/databases/(default)/documents';
 
@@ -43,10 +47,11 @@
 
     /* ---------- вход ---------- */
     var AUTH_ERR = {
-        INVALID_LOGIN_CREDENTIALS: 'Неверная почта или пароль.',
-        INVALID_PASSWORD: 'Неверная почта или пароль.',
-        EMAIL_NOT_FOUND: 'Неверная почта или пароль.',
-        INVALID_EMAIL: 'Введите корректный адрес почты.',
+        INVALID_LOGIN_CREDENTIALS: 'Неверный логин или пароль.',
+        INVALID_PASSWORD: 'Неверный логин или пароль.',
+        EMAIL_NOT_FOUND: 'Неверный логин или пароль.',
+        INVALID_EMAIL: 'Неверный логин или пароль.',
+        INVALID_LOGIN_NAME: 'Логин: только латинские буквы, цифры, точка, дефис, подчёркивание.',
         TOO_MANY_ATTEMPTS_TRY_LATER: 'Слишком много попыток. Подождите несколько минут и попробуйте снова.',
         USER_DISABLED: 'Этот аккаунт отключён.'
     };
@@ -60,7 +65,9 @@
         session = { idToken: j.idToken || j.id_token, refreshToken: j.refreshToken || j.refresh_token, expires: Date.now() + (Number(j.expiresIn || j.expires_in) - 60) * 1000, email: email || (session && session.email) };
         saveSession();
     }
-    function login(email, password) {
+    function login(loginName, password) {
+        var email = loginToEmail(loginName);
+        if (!email) { var bad = new Error('INVALID_LOGIN_NAME'); return Promise.reject(bad); }
         return post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + FB.key, { email: email, password: password, returnSecureToken: true })
             .then(function (j) {
                 if (ADMIN_EMAILS.indexOf(String(j.email).toLowerCase()) === -1) { var e = new Error('NOT_ADMIN'); throw e; }
@@ -231,7 +238,7 @@
 
     function enter() {
         show('panel');
-        $('who').textContent = session.email || '';
+        $('who').textContent = emailToLogin(session.email);
         loadItems().catch(function (e) { note('listNote', explain(e)); });
     }
 
@@ -242,7 +249,7 @@
             var b = $('loginBtn'); busy(b, true);
             note('loginNote', '');
             remember = $('remember').checked;
-            login($('email').value.trim(), $('password').value).then(function () { $('password').value = ''; enter(); })
+            login($('login').value, $('password').value).then(function () { $('password').value = ''; enter(); })
                 .catch(function (e) { note('loginNote', e.message === 'NOT_ADMIN' ? 'У этого аккаунта нет доступа к панели.' : authMsg(e.message)); })
                 .then(function () { busy(b, false, 'Войти'); });
         });
