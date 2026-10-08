@@ -92,6 +92,17 @@
     // Точки слайдера главной получают подписи (для экранных дикторов)
     $('.header-carousel .owl-dot').each(function (i) { $(this).attr('aria-label', (RU ? 'Слайд ' : 'Slayd ') + (i + 1)); });
 
+    // Кнопка «Написать»: раскрывает список мессенджеров
+    (function () {
+        var fab = document.getElementById('chatFab');
+        if (!fab) return;
+        var btn = fab.querySelector('.chat-toggle'), menu = document.getElementById('chatMenu');
+        function set(open) { menu.hidden = !open; btn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+        btn.addEventListener('click', function () { set(menu.hidden); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+        document.addEventListener('click', function (e) { if (!fab.contains(e.target)) set(false); });
+    })();
+
     // Карта Google: подгружается только после нажатия кнопки
     $('.map-load').on('click', function () {
         var $box = $(this).closest('.map-box');
@@ -115,26 +126,51 @@
         pauseSlides: 'Остановить автоматическую смену слайдов', playSlides: 'Запустить автоматическую смену слайдов',
         name: 'Имя', email: 'E-mail', phone: 'Телефон', transport: 'Вид перевозки', freight: 'Тип груза',
         siteMsg: 'Сообщение с сайта: ', quote: 'Запрос расчёта: ', siteReq: 'Запрос с сайта',
+        sending: 'Отправляем…', sent: 'Спасибо! Сообщение отправлено — мы свяжемся с вами в ближайшее время.',
         openMsg: 'Открывается почтовая программа — подтвердите отправку сообщения…', openReq: 'Открывается почтовая программа — подтвердите отправку запроса…'
     } : {
         pauseSlides: 'Slaydların avtomatik dəyişməsini dayandır', playSlides: 'Slaydların avtomatik dəyişməsini başlat',
         name: 'Ad', email: 'E-poçt', phone: 'Telefon', transport: 'Daşınma növü', freight: 'Yükün növü',
         siteMsg: 'Saytdan mesaj: ', quote: 'Hesablama sorğusu: ', siteReq: 'Saytdan sorğu',
+        sending: 'Göndərilir…', sent: 'Təşəkkür edirik! Mesajınız göndərildi — tezliklə sizinlə əlaqə saxlayacağıq.',
         openMsg: 'E-poçt proqramı açılır — mesajı göndərməyi təsdiq edin…', openReq: 'E-poçt proqramı açılır — sorğunu göndərməyi təsdiq edin…'
     };
+
+    var T0 = Date.now();
 
     function buildMailto(subject, lines) {
         var body = lines.filter(function (line) { return !!line; }).join('\n');
         return 'mailto:' + BUSINESS_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
 
-    function showFormStatus($form, message) {
+    function showFormStatus($form, message, ok) {
         var $status = $form.find('.form-status');
         if ($status.length === 0) {
-            $status = $('<div class="form-status alert alert-success mt-3 mb-0"></div>');
+            $status = $('<div class="form-status alert mt-3 mb-0" role="status"></div>');
             $form.append($status);
         }
-        $status.text(message);
+        $status.toggleClass('alert-success', ok !== false).toggleClass('alert-warning', ok === false).text(message);
+    }
+
+    // Заявка уходит в Telegram через /api/lead. Если это не получилось (нет связи, сервис не настроен) —
+    // открывается обычное письмо на почту компании, как раньше.
+    function sendLead(kind, data) {
+        var payload = $.extend({ kind: kind, page: location.href, t: Date.now() - T0 }, data);
+        return fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!(r.ok && j.ok)) throw new Error(j.error || r.status); }); });
+    }
+
+    function submitForm($form, kind, data, mailSubject, mailLines, fallbackText) {
+        var $btn = $form.find('[type="submit"]');
+        $btn.prop('disabled', true);
+        showFormStatus($form, S.sending);
+        sendLead(kind, data).then(function () {
+            showFormStatus($form, S.sent);
+            $form[0].reset();
+        }).catch(function () {
+            window.location.href = buildMailto(mailSubject, mailLines);
+            showFormStatus($form, fallbackText);
+        }).then(function () { $btn.prop('disabled', false); });
     }
 
     $('#contactForm').on('submit', function (e) {
@@ -144,14 +180,8 @@
         var email = $form.find('[name="email"]').val().trim();
         var subject = $form.find('[name="subject"]').val().trim();
         var message = $form.find('[name="message"]').val().trim();
-
-        window.location.href = buildMailto(subject || (S.siteMsg + name), [
-            S.name + ': ' + name,
-            S.email + ': ' + email,
-            '',
-            message
-        ]);
-        showFormStatus($form, S.openMsg);
+        submitForm($form, 'contact', { name: name, email: email, subject: subject, message: message },
+            subject || (S.siteMsg + name), [S.name + ': ' + name, S.email + ': ' + email, '', message], S.openMsg);
     });
 
     $('#quoteForm').on('submit', function (e) {
@@ -163,30 +193,20 @@
         var freight = $form.find('[name="freight"]').val();
         var transport = $form.find('[name="transport"]').val();
         var note = $form.find('[name="note"]').val().trim();
-
-        window.location.href = buildMailto(S.quote + name, [
-            S.name + ': ' + name,
-            S.email + ': ' + email,
-            S.phone + ': ' + mobile,
-            S.transport + ': ' + (transport || '—'),
-            S.freight + ': ' + (freight || '—'),
-            '',
-            note
-        ]);
-        showFormStatus($form, S.openReq);
+        submitForm($form, 'quote', { name: name, email: email, phone: mobile, transport: transport, freight: freight, message: note },
+            S.quote + name, [S.name + ': ' + name, S.email + ': ' + email, S.phone + ': ' + mobile,
+                S.transport + ': ' + (transport || '—'), S.freight + ': ' + (freight || '—'), '', note], S.openReq);
     });
 
-    // Lead / callback forms (name + phone + consent) -> mailto
+    // Короткие формы (имя + телефон): «обратный звонок» и «заявка» на главной
     $('.js-lead-form').on('submit', function (e) {
         e.preventDefault();
         var $form = $(this);
         var name = $form.find('[name="name"]').val().trim();
         var phone = $form.find('[name="phone"]').val().trim();
-        window.location.href = buildMailto($form.data('subject') || S.siteReq, [
-            S.name + ': ' + (name || '—'),
-            S.phone + ': ' + phone
-        ]);
-        showFormStatus($form, S.openReq);
+        var kind = $form.closest('#callbackModal').length ? 'callback' : 'lead';
+        submitForm($form, kind, { name: name, phone: phone },
+            $form.data('subject') || S.siteReq, [S.name + ': ' + (name || '—'), S.phone + ': ' + phone], S.openReq);
     });
 
 })(jQuery);

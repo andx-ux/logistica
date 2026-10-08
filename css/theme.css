@@ -534,3 +534,17 @@ img, svg, video { -webkit-user-drag: none; user-drag: none; }
 .h5 small.text-muted { font-size: 17px; font-weight: 600; }
 .footer .person span { font-size: 16px; font-weight: 600; color: #fff; }
 .site-header .dropdown-item small { font-size: 14px; font-weight: 600; color: #C4CAD8; }
+
+/* --- Кнопка «Написать» (WhatsApp / Telegram) --- */
+.chat-fab { position: fixed; left: 20px; bottom: 24px; z-index: 1040; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.chat-toggle { width: 60px; height: 60px; border: 0; border-radius: 50%; background: #25D366; color: #fff; font-size: 30px; display: grid; place-items: center; cursor: pointer; box-shadow: 0 12px 32px rgba(37, 211, 102, .45); transition: transform .2s; }
+.chat-toggle:hover { transform: scale(1.06); }
+.chat-menu { background: var(--ink); border: 1px solid var(--line); border-radius: 18px; padding: 14px; width: min(290px, calc(100vw - 40px)); box-shadow: 0 18px 50px rgba(11, 15, 25, .4); }
+.chat-menu[hidden] { display: none; }
+.chat-title { color: #fff; font-family: var(--font-head); font-weight: 700; margin: 0 0 10px; font-size: 15px; }
+.chat-link { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; padding: 10px 12px; border-radius: 12px; font-weight: 500; font-size: 15px; }
+.chat-link:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+.chat-link i { font-size: 22px; }
+.chat-link.wa i { color: #25D366; }
+.chat-link.tg i { color: #4FB3E8; }
+@media (max-width: 575.98px) { .chat-fab { left: 14px; bottom: 16px; } .chat-toggle { width: 54px; height: 54px; font-size: 27px; } }
