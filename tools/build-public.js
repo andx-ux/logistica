@@ -23,7 +23,7 @@ const copy = (rel) => {
 };
 
 for (const f of fs.readdirSync(root)) if (f.endsWith('.html')) copy(f);
-['robots.txt', 'sitemap.xml', 'css', 'js', 'img', 'lib', 'ru'].forEach(copy);
+['robots.txt', 'sitemap.xml', '0263c939f47b379ab072220a8ffa5ac3.txt', 'css', 'js', 'img', 'lib', 'ru'].forEach(copy);
 copy('gallery/items.json');
 copy('gallery/photos');
 copy('gallery/videos');
