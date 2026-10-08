@@ -548,3 +548,8 @@ img, svg, video { -webkit-user-drag: none; user-drag: none; }
 .chat-link.wa i { color: #25D366; }
 .chat-link.tg i { color: #4FB3E8; }
 @media (max-width: 575.98px) { .chat-fab { left: 14px; bottom: 16px; } .chat-toggle { width: 54px; height: 54px; font-size: 27px; } }
+
+/* Кнопка «Отправить в WhatsApp» в формах */
+.btn-wa { background: #25D366; border: 0; color: #fff; font-weight: 600; border-radius: 12px; padding: 12px 22px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-wa:hover, .btn-wa:focus-visible { background: #1EBE5A; color: #fff; }
+.btn-wa i { font-size: 20px; }

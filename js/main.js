@@ -173,6 +173,22 @@
         }).then(function () { $btn.prop('disabled', false); });
     }
 
+    // Кнопка «Отправить в WhatsApp»: открывает чат с готовым текстом из формы
+    $('.js-wa-send').on('click', function () {
+        var $btn = $(this), $form = $btn.closest('form');
+        if ($form[0] && $form[0].reportValidity && !$form[0].reportValidity()) return;
+        var lines = [RU ? 'Здравствуйте! Сообщение с сайта rr-logistics.org' : 'Salam! rr-logistics.org saytından mesaj'];
+        function v(n) { return ($form.find('[name="' + n + '"]').val() || '').trim(); }
+        var rows = [[S.name, v('name')], [S.phone, v('phone') || v('mobile')], [S.email, v('email')],
+            [RU ? 'Тема' : 'Mövzu', v('subject')], [S.transport, v('transport')], [S.freight, v('freight')]];
+        rows.forEach(function (r) { if (r[1]) lines.push(r[0] + ': ' + r[1]); });
+        var msg = v('message') || v('note');
+        if (msg) { lines.push(''); lines.push(msg); }
+        var url = 'https://wa.me/' + String($btn.data('wa')).replace(/\D/g, '') + '?text=' + encodeURIComponent(lines.join('\n'));
+        var w = window.open(url, '_blank', 'noopener');
+        if (!w) { window.location.href = url; }
+    });
+
     $('#contactForm').on('submit', function (e) {
         e.preventDefault();
         var $form = $(this);
