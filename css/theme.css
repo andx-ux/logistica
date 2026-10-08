@@ -553,3 +553,7 @@ img, svg, video { -webkit-user-drag: none; user-drag: none; }
 .btn-wa { background: #25D366; border: 0; color: #fff; font-weight: 600; border-radius: 12px; padding: 12px 22px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-wa:hover, .btn-wa:focus-visible { background: #1EBE5A; color: #fff; }
 .btn-wa i { font-size: 20px; }
+
+.btn-tg { background: #229ED9; border: 0; color: #fff; font-weight: 600; border-radius: 12px; padding: 12px 22px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-tg:hover, .btn-tg:focus-visible { background: #1B88BC; color: #fff; }
+.btn-tg i { font-size: 20px; }

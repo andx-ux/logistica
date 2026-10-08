@@ -173,10 +173,8 @@
         }).then(function () { $btn.prop('disabled', false); });
     }
 
-    // Кнопка «Отправить в WhatsApp»: открывает чат с готовым текстом из формы
-    $('.js-wa-send').on('click', function () {
-        var $btn = $(this), $form = $btn.closest('form');
-        if ($form[0] && $form[0].reportValidity && !$form[0].reportValidity()) return;
+    // Кнопки «Отправить в WhatsApp / Telegram»: открывают чат с готовым текстом из формы
+    function chatText($form) {
         var lines = [RU ? 'Здравствуйте! Сообщение с сайта rr-logistics.org' : 'Salam! rr-logistics.org saytından mesaj'];
         function v(n) { return ($form.find('[name="' + n + '"]').val() || '').trim(); }
         var rows = [[S.name, v('name')], [S.phone, v('phone') || v('mobile')], [S.email, v('email')],
@@ -184,9 +182,22 @@
         rows.forEach(function (r) { if (r[1]) lines.push(r[0] + ': ' + r[1]); });
         var msg = v('message') || v('note');
         if (msg) { lines.push(''); lines.push(msg); }
-        var url = 'https://wa.me/' + String($btn.data('wa')).replace(/\D/g, '') + '?text=' + encodeURIComponent(lines.join('\n'));
+        return lines.join('\n');
+    }
+    function openChat($btn, urlFor) {
+        var $form = $btn.closest('form');
+        if ($form[0] && $form[0].reportValidity && !$form[0].reportValidity()) return;
+        var url = urlFor(encodeURIComponent(chatText($form)));
         var w = window.open(url, '_blank', 'noopener');
         if (!w) { window.location.href = url; }
+    }
+    $('.js-wa-send').on('click', function () {
+        var num = String($(this).data('wa')).replace(/\D/g, '');
+        openChat($(this), function (text) { return 'https://wa.me/' + num + '?text=' + text; });
+    });
+    $('.js-tg-send').on('click', function () {
+        var user = String($(this).data('tg')).replace(/[^A-Za-z0-9_]/g, '');
+        openChat($(this), function (text) { return 'https://t.me/' + user + '?text=' + text; });
     });
 
     $('#contactForm').on('submit', function (e) {
