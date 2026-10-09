@@ -566,3 +566,6 @@ img, svg, video { -webkit-user-drag: none; user-drag: none; }
     .site-header .site-nav a.nav-link-s, .site-header .site-nav .dropdown-toggle { padding: 9px 10px; font-size: 14px; }
     .site-header .lang-switch a { padding: 6px 9px; }
 }
+
+/* Размер нажимаемой области в подвале — не меньше 24 px (WCAG 2.2) */
+.footer a[href^="tel:"], .footer a[href^="mailto:"], .footer .border-bottom { display: inline-block; min-height: 24px; line-height: 24px; }

@@ -57,12 +57,7 @@
 
 /*** Navbar ***/
 .navbar .dropdown-toggle::after {
-    border: none;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    vertical-align: middle;
-    margin-left: 8px;
+    display: none;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -374,11 +369,15 @@
 }
 
 .footer .btn.btn-link::before {
-    position: relative;
-    content: "\f105";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
+    content: "";
+    display: inline-block;
+    width: .8em;
+    height: .8em;
+    vertical-align: -.05em;
     margin-right: 10px;
+    background-color: currentColor;
+    -webkit-mask: var(--i-angle-right) center/contain no-repeat;
+    mask: var(--i-angle-right) center/contain no-repeat;
 }
 
 .footer .btn.btn-link:hover {

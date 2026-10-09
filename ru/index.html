@@ -33,18 +33,17 @@
     <meta name="author" content="R.R. Logistics LLC">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https://i.ytimg.com https://i.postimg.cc https://postimg.cc https://i.ibb.co; media-src 'self'; frame-src https://www.google.com https://www.youtube-nocookie.com; connect-src 'self' https://firestore.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://i.ytimg.com https://i.postimg.cc https://postimg.cc https://i.ibb.co; media-src 'self'; frame-src https://www.google.com https://www.youtube-nocookie.com; connect-src 'self' https://firestore.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 
     <!-- Favicon -->
     <link href="../img/favicon-32.png" rel="icon" type="image/png" sizes="64x64">
     <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Шрифты (размещены на сайте) -->
-    <link href="../css/fonts.css?v=20261022" rel="stylesheet">
+    <link href="../css/fonts.css?v=20261023" rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+    <!-- Icons (SVG, hosted on the site) -->
+    <link href="../css/icons.css?v=20261023" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="../lib/animate/animate.min.css" rel="stylesheet">
@@ -54,11 +53,11 @@
     <link href="../css/vendor/bootstrap-5.3.3.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="../css/style.css?v=20261022" rel="stylesheet">
+    <link href="../css/style.css?v=20261023" rel="stylesheet">
 
     <!-- Dark theme -->
-    <link href="../css/theme.css?v=20261022" rel="stylesheet">
-    <link href="../css/gallery.css?v=20261022" rel="stylesheet">
+    <link href="../css/theme.css?v=20261023" rel="stylesheet">
+    <link href="../css/gallery.css?v=20261023" rel="stylesheet">
     <!-- Структурированные данные -->
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Organization","LocalBusiness"],"@id":"https://rr-logistics.org/#org","name":"R.R. Logistics","legalName":"R.R. Logistics LLC","url":"https://rr-logistics.org/","logo":"https://rr-logistics.org/img/logo-full.webp","image":"https://rr-logistics.org/img/og-logo.jpg","email":"info@rr-logistics.org","telephone":["+994707351151","+994552460240"],"description":"Международные грузоперевозки: автомобильным, железнодорожным, морским и воздушным транспортом, мультимодальные перевозки, таможенное оформление и склад.","address":{"@type":"PostalAddress","streetAddress":"проспект Азербайджана 22/29","addressLocality":"Астара","addressCountry":"AZ"},"areaServed":["AZ","RU","IR","TR"],"knowsLanguage":["az","ru","en"],"sameAs":["https://t.me/rrlogisticss"],"contactPoint":[{"@type":"ContactPoint","contactType":"customer service","telephone":"+994707351151","name":"Руслан","availableLanguage":["az","ru","en"],"areaServed":"AZ"},{"@type":"ContactPoint","contactType":"customer service","telephone":"+994552460240","name":"Рамин","availableLanguage":["az","ru","en"],"areaServed":"AZ"}]},{"@type":"WebSite","@id":"https://rr-logistics.org/#site","url":"https://rr-logistics.org/","name":"R.R. Logistics LLC","inLanguage":["az","ru","en"],"publisher":{"@id":"https://rr-logistics.org/#org"}},{"@type":"WebPage","@id":"https://rr-logistics.org/ru/#page","url":"https://rr-logistics.org/ru/","name":"R.R. Logistics LLC — международные грузоперевозки | Астара","description":"R.R. Logistics LLC: международные грузоперевозки авто, ж/д, морским и авиатранспортом, мультимодальные перевозки, таможня и склад. Астара, Азербайджан.","inLanguage":"ru","isPartOf":{"@id":"https://rr-logistics.org/#site"},"about":{"@id":"https://rr-logistics.org/#org"},"primaryImageOfPage":"https://rr-logistics.org/img/og-logo.jpg"}]}</script>
 </head>
@@ -127,7 +126,7 @@
         <button type="button" class="hero-pause" aria-label="Остановить автоматическую смену слайдов" aria-pressed="false"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
-                <img src="../img/carousel-1.jpg" fetchpriority="high" width="1920" height="1080" alt="Грузовое судно с контейнерами в море">
+                <img src="../img/carousel-1.jpg" srcset="../img/carousel-1-960.webp 960w, ../img/carousel-1.jpg 1920w" sizes="100vw" fetchpriority="high" width="1920" height="1080" alt="Грузовое судно с контейнерами в море">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
                     <div class="container">
                         <div class="row justify-content-start">
@@ -143,7 +142,7 @@
                 </div>
             </div>
             <div class="owl-carousel-item position-relative">
-                <img src="../img/carousel-2.jpg" width="1920" height="1080" alt="Контейнеровоз перевозит груз через океан">
+                <img src="../img/carousel-2.jpg" srcset="../img/carousel-2-960.webp 960w, ../img/carousel-2.jpg 1920w" sizes="100vw" width="1920" height="1080" alt="Контейнеровоз перевозит груз через океан">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
                     <div class="container">
                         <div class="row justify-content-start">
@@ -272,7 +271,7 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                    <div class="about-photo"><img src="../img/about.jpg" width="800" height="800" alt="Работник склада готовит посылку к отправке" loading="lazy"></div>
+                    <div class="about-photo"><img src="../img/about.webp" width="800" height="800" alt="Работник склада готовит посылку к отправке" loading="lazy"></div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <p class="eyebrow text-secondary text-uppercase mb-3">О нас</p>
@@ -449,9 +448,9 @@
     <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="../js/protect.js?v=20261022"></script>
-    <script src="../js/main.js?v=20261022"></script>
-    <script src="../js/gallery.js?v=20261022"></script>
+    <script src="../js/protect.js?v=20261023"></script>
+    <script src="../js/main.js?v=20261023"></script>
+    <script src="../js/gallery.js?v=20261023"></script>
 </body>
 
 </html>
