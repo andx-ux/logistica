@@ -98,7 +98,7 @@
     function docToItem(d) {
         var f = d.fields || {};
         var g = function (k) { return f[k] && f[k].stringValue != null ? f[k].stringValue : ''; };
-        return { id: d.name.split('/').pop(), type: g('type'), url: g('url'), yt: g('yt'), az: g('title_az'), ru: g('title_ru'), ts: f.timestamp ? Number(f.timestamp.integerValue || 0) : 0 };
+        return { id: d.name.split('/').pop(), type: g('type'), url: g('url'), yt: g('yt'), az: g('title_az'), ru: g('title_ru'), en: g('title_en'), ts: f.timestamp ? Number(f.timestamp.integerValue || 0) : 0 };
     }
     function loadItems() {
         return api('GET', '/' + FB.col + '?pageSize=300&orderBy=' + encodeURIComponent('timestamp desc')).then(function (j) {
@@ -108,7 +108,7 @@
     }
     function add(it) {
         return api('POST', '/' + FB.col, { fields: {
-            type: sv(it.type), url: sv(it.url), yt: sv(it.yt), title_az: sv(it.az), title_ru: sv(it.ru),
+            type: sv(it.type), url: sv(it.url), yt: sv(it.yt), title_az: sv(it.az), title_ru: sv(it.ru), title_en: sv(it.en || ''),
             timestamp: { integerValue: String(it.ts) }
         } });
     }
@@ -182,7 +182,9 @@
         if (az === null) return;
         var ru = window.prompt('Подпись на русском (можно пусто):', it.ru);
         if (ru === null) return;
-        patch(it.id, { title_az: sv(az.trim().slice(0, 150)), title_ru: sv(ru.trim().slice(0, 150)) }, ['title_az', 'title_ru'])
+        var en = window.prompt('Подпись на английском (можно пусто):', it.en || '');
+        if (en === null) return;
+        patch(it.id, { title_az: sv(az.trim().slice(0, 150)), title_ru: sv(ru.trim().slice(0, 150)), title_en: sv(en.trim().slice(0, 150)) }, ['title_az', 'title_ru', 'title_en'])
             .then(loadItems).catch(function (e) { note('listNote', explain(e)); });
     }
     function remove(it) {
@@ -208,6 +210,7 @@
         var raw = lines($(kind === 'photo' ? 'photoUrls' : 'ytUrls').value);
         var az = $(kind === 'photo' ? 'photoAz' : 'ytAz').value.trim().slice(0, 150);
         var ru = $(kind === 'photo' ? 'photoRu' : 'ytRu').value.trim().slice(0, 150);
+        var en = $(kind === 'photo' ? 'photoEn' : 'ytEn').value.trim().slice(0, 150);
         if (!raw.length) { note(noteId, kind === 'photo' ? 'Вставьте хотя бы одну ссылку на фото.' : 'Вставьте хотя бы одну ссылку на видео.'); return; }
         var list = [];
         for (var i = 0; i < raw.length; i++) {
@@ -225,11 +228,12 @@
         var base = Date.now();
         // по одному, чтобы сохранить порядок: первая ссылка в списке окажется выше остальных
         list.reduce(function (p, it, k) {
-            return p.then(function () { return add({ type: it.type, url: it.url, yt: it.yt, az: az, ru: ru, ts: base + (list.length - k) }); });
+            return p.then(function () { return add({ type: it.type, url: it.url, yt: it.yt, az: az, ru: ru, en: en, ts: base + (list.length - k) }); });
         }, Promise.resolve()).then(function () {
             $(kind === 'photo' ? 'photoUrls' : 'ytUrls').value = '';
             $(kind === 'photo' ? 'photoAz' : 'ytAz').value = '';
             $(kind === 'photo' ? 'photoRu' : 'ytRu').value = '';
+            $(kind === 'photo' ? 'photoEn' : 'ytEn').value = '';
             (kind === 'photo' ? previewPhoto : previewYt)();
             note(noteId, 'Добавлено: ' + list.length + '. Оно уже на сайте.', true);
             return loadItems();

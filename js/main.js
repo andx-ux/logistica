@@ -90,7 +90,7 @@
 
 
     // Точки слайдера главной получают подписи (для экранных дикторов)
-    $('.header-carousel .owl-dot').each(function (i) { $(this).attr('aria-label', (RU ? 'Слайд ' : 'Slayd ') + (i + 1)); });
+    $('.header-carousel .owl-dot').each(function (i) { $(this).attr('aria-label', ({ ru: 'Слайд ', en: 'Slide ' }[LANG] || 'Slayd ') + (i + 1)); });
 
     // Кнопка «Написать»: раскрывает список мессенджеров
     (function () {
@@ -121,8 +121,15 @@
     var BUSINESS_EMAIL = 'info@rr-logistics.org';
 
     // Тексты писем — на языке страницы
-    var RU = document.documentElement.lang === 'ru';
-    var S = RU ? {
+    var LANG = document.documentElement.lang;
+    var RU = LANG === 'ru';
+    var S = LANG === 'en' ? {
+        pauseSlides: 'Stop automatic slide change', playSlides: 'Start automatic slide change',
+        name: 'Name', email: 'Email', phone: 'Phone', transport: 'Type of transportation', freight: 'Cargo type',
+        siteMsg: 'Message from the website: ', quote: 'Quote request: ', siteReq: 'Request from the website',
+        sending: 'Sending…', sent: 'Thank you! Your message has been sent — we will contact you shortly.',
+        openMsg: 'Your email program is opening — please confirm sending the message…', openReq: 'Your email program is opening — please confirm sending the request…'
+    } : RU ? {
         pauseSlides: 'Остановить автоматическую смену слайдов', playSlides: 'Запустить автоматическую смену слайдов',
         name: 'Имя', email: 'E-mail', phone: 'Телефон', transport: 'Вид перевозки', freight: 'Тип груза',
         siteMsg: 'Сообщение с сайта: ', quote: 'Запрос расчёта: ', siteReq: 'Запрос с сайта',
@@ -175,10 +182,10 @@
 
     // Кнопки «Отправить в WhatsApp / Telegram»: открывают чат с готовым текстом из формы
     function chatText($form) {
-        var lines = [RU ? 'Здравствуйте! Сообщение с сайта rr-logistics.org' : 'Salam! rr-logistics.org saytından mesaj'];
+        var lines = [{ ru: 'Здравствуйте! Сообщение с сайта rr-logistics.org', en: 'Hello! A message from the rr-logistics.org website' }[LANG] || 'Salam! rr-logistics.org saytından mesaj'];
         function v(n) { return ($form.find('[name="' + n + '"]').val() || '').trim(); }
         var rows = [[S.name, v('name')], [S.phone, v('phone') || v('mobile')], [S.email, v('email')],
-            [RU ? 'Тема' : 'Mövzu', v('subject')], [S.transport, v('transport')], [S.freight, v('freight')]];
+            [{ ru: 'Тема', en: 'Subject' }[LANG] || 'Mövzu', v('subject')], [S.transport, v('transport')], [S.freight, v('freight')]];
         rows.forEach(function (r) { if (r[1]) lines.push(r[0] + ': ' + r[1]); });
         var msg = v('message') || v('note');
         if (msg) { lines.push(''); lines.push(msg); }

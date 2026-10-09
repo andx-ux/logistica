@@ -9,10 +9,10 @@
     <meta name="referrer" content="no-referrer">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https://i.ytimg.com https://i.postimg.cc https://postimg.cc https://i.ibb.co; connect-src 'self' https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'none'">
     <link href="img/favicon-32.png" rel="icon" type="image/png" sizes="64x64">
-    <link href="css/fonts.css?v=20261020" rel="stylesheet">
+    <link href="css/fonts.css?v=20261022" rel="stylesheet">
     <link href="css/vendor/bootstrap-5.3.3.min.css" rel="stylesheet">
-    <link href="css/theme.css?v=20261020" rel="stylesheet">
-    <link href="css/admin.css?v=20261020" rel="stylesheet">
+    <link href="css/theme.css?v=20261022" rel="stylesheet">
+    <link href="css/admin.css?v=20261022" rel="stylesheet">
 </head>
 
 <body class="adm">
@@ -49,6 +49,7 @@
             <div class="adm-row">
                 <div><label class="adm-f" for="photoAz">Подпись (azərbaycanca)</label><input class="adm-in" id="photoAz" maxlength="150" placeholder="необязательно"></div>
                 <div><label class="adm-f" for="photoRu">Подпись (по-русски)</label><input class="adm-in" id="photoRu" maxlength="150" placeholder="необязательно"></div>
+                <div><label class="adm-f" for="photoEn">Подпись (English)</label><input class="adm-in" id="photoEn" maxlength="150" placeholder="необязательно"></div>
             </div>
             <p id="photoNote" class="adm-note err" hidden></p>
             <button id="addPhoto" class="adm-btn" type="button">Добавить на сайт</button>
@@ -63,6 +64,7 @@
             <div class="adm-row">
                 <div><label class="adm-f" for="ytAz">Подпись (azərbaycanca)</label><input class="adm-in" id="ytAz" maxlength="150" placeholder="необязательно"></div>
                 <div><label class="adm-f" for="ytRu">Подпись (по-русски)</label><input class="adm-in" id="ytRu" maxlength="150" placeholder="необязательно"></div>
+                <div><label class="adm-f" for="ytEn">Подпись (English)</label><input class="adm-in" id="ytEn" maxlength="150" placeholder="необязательно"></div>
             </div>
             <p id="ytNote" class="adm-note err" hidden></p>
             <button id="addYt" class="adm-btn" type="button">Добавить на сайт</button>
@@ -97,7 +99,7 @@ service cloud.firestore {
         </div>
     </div>
 
-    <script src="js/admin.js?v=20261020"></script>
+    <script src="js/admin.js?v=20261022"></script>
 </body>
 
 </html>

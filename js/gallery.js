@@ -10,16 +10,17 @@
     var grid = document.getElementById('galGrid');
     if (!stage && !grid) return;
 
-    var lang = document.documentElement.lang === 'ru' ? 'ru' : 'az';
+    var lang = { ru: 'ru', en: 'en' }[document.documentElement.lang] || 'az';
     var TT = {
         az: { all: 'Hamısı', photo: 'Foto', video: 'Video', empty: 'Qalereya tezliklə doldurulacaq.', prev: 'Əvvəlki', next: 'Növbəti', pause: 'Avtomatik dəyişməni dayandır', play: 'Avtomatik dəyişməni başlat', close: 'Bağla', photoN: 'Fotoşəkil', videoN: 'Video', gallery: 'Qalereya', of: ' / ' },
+        en: { all: 'All', photo: 'Photos', video: 'Videos', empty: 'The gallery will be filled soon.', prev: 'Previous', next: 'Next', pause: 'Stop automatic change', play: 'Start automatic change', close: 'Close', photoN: 'Photo', videoN: 'Video', gallery: 'Gallery', of: ' / ' },
         ru: { all: 'Все', photo: 'Фото', video: 'Видео', empty: 'Галерея скоро будет заполнена.', prev: 'Назад', next: 'Вперёд', pause: 'Остановить автоматическую смену', play: 'Запустить автоматическую смену', close: 'Закрыть', photoN: 'Фото', videoN: 'Видео', gallery: 'Галерея', of: ' / ' }
     };
     var T = TT[lang];
     var holder = stage || grid;
     var BASE = holder.getAttribute('data-base') || '';   // «../» на страницах русской версии
     // подпись может быть строкой или объектом { "az": "...", "ru": "..." }
-    function titleOf(it) { var t = it && it.title; if (t && typeof t === 'object') return t[lang] || t.az || t.ru || ''; return t || ''; }
+    function titleOf(it) { var t = it && it.title; if (t && typeof t === 'object') return t[lang] || t.az || t.ru || t.en || ''; return t || ''; }
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var INTERVAL = 5000;
 
@@ -46,7 +47,7 @@
             return (j.documents || []).map(function (d) {
                 var f = d.fields || {};
                 var s = function (k) { return f[k] && f[k].stringValue != null ? f[k].stringValue : ''; };
-                var title = { az: s('title_az'), ru: s('title_ru') };
+                var title = { az: s('title_az'), ru: s('title_ru'), en: s('title_en') };
                 if (s('type') === 'youtube') return { type: 'youtube', id: s('yt'), title: title };
                 return { type: 'photo', src: s('url'), title: title, remote: true };
             });

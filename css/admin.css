@@ -17,7 +17,7 @@ body.adm { background: #F4F5F8; }
 .adm-in, .adm-ta { width: 100%; border: 1px solid #D5DAE5; border-radius: 12px; padding: 12px 14px; font-size: 15px; font-family: var(--font-body); background: #fff; }
 .adm-ta { min-height: 92px; resize: vertical; }
 .adm-in:focus, .adm-ta:focus { outline: 0; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(37, 99, 168, .18); }
-.adm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.adm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 @media (max-width: 575.98px) { .adm-row { grid-template-columns: 1fr; } }
 .adm-btn { display: inline-block; margin-top: 18px; border: 0; border-radius: 99px; background: var(--purple); color: #fff; font-family: var(--font-head); font-weight: 700; padding: 13px 32px; cursor: pointer; font-size: 15px; }
 .adm-btn:hover { background: var(--purple-hover); }

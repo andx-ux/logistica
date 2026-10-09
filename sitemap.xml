@@ -4,112 +4,192 @@
     <loc>https://rr-logistics.org/</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/about</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/about"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/about"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/about"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/about</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/about"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/about"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/about"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/about"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/service</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/service"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/service"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/service"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/service</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/service"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/service"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/service"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/service</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/service"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/service"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/service"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/feature</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/feature"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/feature"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/feature"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/feature</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/feature"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/feature"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/feature"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/feature</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/feature"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/feature"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/feature"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/gallery</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/gallery"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/gallery"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/gallery"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/gallery</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/gallery"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/gallery"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/gallery"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/gallery</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/gallery"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/gallery"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/gallery"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/quote</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/quote"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/quote"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/quote"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/quote</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/quote"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/quote"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/quote"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/quote</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/quote"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/quote"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/quote"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/contact</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/contact"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/contact"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/contact"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/contact</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/contact"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/contact"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/contact"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/contact"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/terms</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/terms"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/terms"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/terms"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://rr-logistics.org/ru/terms</loc>
     <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/terms"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/terms"/>
-    <lastmod>2026-10-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/terms"/>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://rr-logistics.org/en/terms</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://rr-logistics.org/terms"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://rr-logistics.org/ru/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://rr-logistics.org/en/terms"/>
+    <lastmod>2026-10-09</lastmod>
     <priority>0.3</priority>
   </url>
 </urlset>

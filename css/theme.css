@@ -557,3 +557,12 @@ img, svg, video { -webkit-user-drag: none; user-drag: none; }
 .btn-tg { background: #229ED9; border: 0; color: #fff; font-weight: 600; border-radius: 12px; padding: 12px 22px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-tg:hover, .btn-tg:focus-visible { background: #1B88BC; color: #fff; }
 .btn-tg i { font-size: 20px; }
+
+/* Шапка с тремя языками: пункты меню не переносятся на вторую строку, на средних экранах чуть компактнее */
+.site-header .site-nav a.nav-link-s, .site-header .site-nav .dropdown-toggle { white-space: nowrap; }
+@media (min-width: 992px) and (max-width: 1279.98px) {
+    .site-header .bar { gap: 14px; }
+    .site-header .navbar-collapse { gap: 12px; }
+    .site-header .site-nav a.nav-link-s, .site-header .site-nav .dropdown-toggle { padding: 9px 10px; font-size: 14px; }
+    .site-header .lang-switch a { padding: 6px 9px; }
+}
